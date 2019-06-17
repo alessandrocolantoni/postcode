@@ -13,7 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 import it.wcc.postcode.dto.PostCodesDistance;
 
 @RestController
-@RequestMapping("distance/")
+@RequestMapping("/distance")
 public class DistanceController {
 
 //	@GetMapping(value = "{id}/list",  produces = MediaType.APPLICATION_JSON_VALUE)
@@ -34,7 +34,7 @@ public class DistanceController {
 		
 	}
 	
-	@GetMapping(value = "hola",  produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/hola",  produces = MediaType.APPLICATION_JSON_VALUE)
 	public String hola() {
 		try {
 			 

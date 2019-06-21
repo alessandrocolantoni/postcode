@@ -46,14 +46,14 @@ public class AuthenticationMananagerProvider extends WebSecurityConfigurerAdapte
 //            .anyRequest().authenticated();
 //    }
 	
-	@Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-          .authorizeRequests()
-          .anyRequest()
-          .authenticated()
-//          .and()
-//          .httpBasic()
-          ;
-    }
+//	@Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http
+//          .authorizeRequests()
+//          .anyRequest()
+//          .authenticated()
+////          .and()
+////          .httpBasic()
+//          ;
+//    }
 }

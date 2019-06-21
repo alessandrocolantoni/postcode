@@ -16,6 +16,11 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
 
+/**
+ * https://github.com/habuma/spring-security-oauth2-jwt-example/tree/master/oauth-auth-server
+ * @author alessandro.colantoni
+ *
+ */
 @Configuration
 @EnableAuthorizationServer
 public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
@@ -59,29 +64,39 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 //                .authenticationManager(authenticationManager);
 //    }
 
-//    @Override
-//    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-//        clients.inMemory()
-//                .withClient("service-account-1")
-//                .secret("service-account-1-secret")
-//                .authorizedGrantTypes("client_credentials")
-//                //.authorizedGrantTypes("client_credentials",GRANT_TYPE_PASSWORD, AUTHORIZATION_CODE, REFRESH_TOKEN)
-//                .scopes("resource-server-read", "resource-server-write");
-//    }
-    
     @Override
-	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-		//@formatter:off
-		clients
-			.inMemory()
-				.withClient("myclient")
-				.secret("secret")
-				.authorizedGrantTypes("authorization_code", "implicit", "password", "client_credentials", "refresh_token")
-				.scopes("read")
-				.redirectUris("http://localhost:9191/x")
-				.accessTokenValiditySeconds(86400); // 24 hours
-		//@formatter:on
-	}
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        clients.inMemory()
+                .withClient("service-account-1")
+                .secret("service-account-1-secret")
+                .authorizedGrantTypes("client_credentials")
+                //.authorizedGrantTypes("client_credentials",GRANT_TYPE_PASSWORD, AUTHORIZATION_CODE, REFRESH_TOKEN)
+                //.scopes("resource-server-read", "resource-server-write")
+                .scopes("any")
+                ;
+    }
+    
+    /**
+     * https://stackoverflow.com/questions/48761624/spring-boot-invalid-access-token-error?rq=1
+     */
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {     
+        security.allowFormAuthenticationForClients().checkTokenAccess("permitAll()");       
+    }
+    
+//    @Override
+//	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+//		//@formatter:off
+//		clients
+//			.inMemory()
+//				.withClient("myclient")
+//				.secret("secret")
+//				.authorizedGrantTypes("authorization_code", "implicit", "password", "client_credentials", "refresh_token")
+//				.scopes("read")
+//				.redirectUris("http://localhost:9191/x")
+//				.accessTokenValiditySeconds(86400); // 24 hours
+//		//@formatter:on
+//	}
     
  // A token store bean. In-memory token store
 // 	@Bean

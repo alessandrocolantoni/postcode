@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.security.Principal;
 
 @SpringBootApplication
-//@RestController
-//@EnableResourceServer
+@RestController
+@EnableResourceServer
 public class AuthenticationServer {
     public static void main(String[] args) {
         SpringApplication.run(AuthenticationServer.class, args);
@@ -21,12 +21,12 @@ public class AuthenticationServer {
 
     private static final Log logger = LogFactory.getLog(AuthenticationServer.class);
 
-//    @RequestMapping("/user")
-//    public Principal user(Principal user) {
-//        logger.info("AS /user has been called");
-//        logger.debug("user info: " + user.toString());
-//        return user;
-//    }
+    @RequestMapping("/user")
+    public Principal user(Principal user) {
+        logger.info("AS /user has been called");
+        logger.debug("user info: " + user.toString());
+        return user;
+    }
 
 
 }

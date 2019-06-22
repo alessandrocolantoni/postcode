@@ -1,4 +1,4 @@
-package it.wcc.postcode.configuration;
+package it.wcc.oauth2.authorization_server;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

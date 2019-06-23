@@ -2,18 +2,13 @@ package it.wcc.oauth2.authorization_server;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
 
 /**
@@ -73,16 +68,37 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
                 //.authorizedGrantTypes("client_credentials",GRANT_TYPE_PASSWORD, AUTHORIZATION_CODE, REFRESH_TOKEN)
                 //.scopes("resource-server-read", "resource-server-write")
                 .scopes("any")
+                
+                .and()
+                .withClient("ale-read")
+                .secret("alessandro")
+                .authorizedGrantTypes("client_credentials")
+                .scopes("any")
+                .authorities("ROLE_READ")
+                
+                .and()
+                .withClient("ale-write")
+                .secret("alessandro")
+                .authorizedGrantTypes("client_credentials")
+                .scopes("any")
+                .authorities("ROLE_WRITE")
+                
+                .and()
+                .withClient("ale-read-write")
+                .secret("alessandro")
+                .authorizedGrantTypes("client_credentials")
+                .scopes("any")
+                .authorities("ROLE_READ", "ROLE_WRITE")
                 ;
     }
     
     /**
      * https://stackoverflow.com/questions/48761624/spring-boot-invalid-access-token-error?rq=1
      */
-    @Override
-    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {     
-        security.allowFormAuthenticationForClients().checkTokenAccess("permitAll()");       
-    }
+//    @Override
+//    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {     
+//        security.allowFormAuthenticationForClients().checkTokenAccess("permitAll()");       
+//    }
     
 //    @Override
 //	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {

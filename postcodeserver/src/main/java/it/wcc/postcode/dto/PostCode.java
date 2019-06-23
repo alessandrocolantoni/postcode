@@ -9,7 +9,7 @@ public class PostCode implements Serializable{
 
 	private String postCode;
 	
-	private Coordinates soordinates;
+	private Coordinates coordinates;
 
 	public String getPostCode() {
 		return postCode;
@@ -19,13 +19,16 @@ public class PostCode implements Serializable{
 		this.postCode = postCode;
 	}
 
-	public Coordinates getSoordinates() {
-		return soordinates;
+	public Coordinates getCoordinates() {
+		return coordinates;
 	}
 
-	public void setSoordinates(Coordinates soordinates) {
-		this.soordinates = soordinates;
+	public void setCoordinates(Coordinates coordinates) {
+		this.coordinates = coordinates;
 	}
+
+	 
+	
 	
 	
 	

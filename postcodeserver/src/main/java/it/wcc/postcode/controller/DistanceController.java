@@ -4,6 +4,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,7 +41,8 @@ public class DistanceController {
 	}
 	
 	//@PreAuthorize("#oauth2.hasScope('resource-server-read')")
-	@GetMapping(value = "/postcode/{postcode}",  produces = MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('ROLE_READ') or hasRole('ROLE_WRITE')")
+	@GetMapping(value = "/{postcode}",  produces = MediaType.APPLICATION_JSON_VALUE)
 	public PostCode postCode(@PathVariable ("postcode") String postcode) {
 		try {
 			PostCode p = new PostCode();
@@ -52,6 +54,7 @@ public class DistanceController {
 		
 	}
 	
+	@PreAuthorize("hasRole('ROLE_WRITE')")
 	@PutMapping(value = "/modify/{postcode}",  produces = MediaType.APPLICATION_JSON_VALUE)
 	public PostCode postCode(@RequestBody  Coordinates coordinates) {
 		try {
@@ -65,7 +68,8 @@ public class DistanceController {
 		
 	}
 	
-	@PostMapping(value = "/add/{postcode}",  produces = MediaType.APPLICATION_JSON_VALUE)
+	@PreAuthorize("hasRole('ROLE_WRITE')")
+	@PostMapping(value = "/add",  produces = MediaType.APPLICATION_JSON_VALUE)
 	public PostCode postCode(@RequestBody  PostCode postCode) {
 		try {
 			PostCode p = new PostCode();

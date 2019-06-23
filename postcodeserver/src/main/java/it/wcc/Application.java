@@ -1,7 +1,5 @@
 package it.wcc;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
@@ -15,10 +13,10 @@ public class Application /*extends ResourceServerConfigurerAdapter */ {
         SpringApplication.run(Application.class, args);
     }
 
-    private static final Log logger = LogFactory.getLog(Application.class);
-
-    
-    private String message = "Hello world!";
+//    private static final Log logger = LogFactory.getLog(Application.class);
+//
+//    
+//    private String message = "Hello world!";
     
 //    @RequestMapping("/user")
 //    public Principal user(Principal user) {

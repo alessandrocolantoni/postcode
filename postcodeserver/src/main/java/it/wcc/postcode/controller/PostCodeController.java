@@ -3,6 +3,8 @@ package it.wcc.postcode.controller;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -28,11 +30,12 @@ import it.wcc.postcode.service.postcode.PostCodeService;
 //@RequestMapping("/distance")
 public class PostCodeController {
 
-//	@GetMapping(value = "{id}/list",  produces = MediaType.APPLICATION_JSON_VALUE)
-//	public ResponseEntity<PostCodesDistance> distance() {
-//		
-//		
-//	}
+
+	
+	
+	private static final Logger log = LoggerFactory.getLogger(PostCodeController.class);
+	
+	
 	
     @Autowired
     private PostCodeService postCodeService;
@@ -42,6 +45,10 @@ public class PostCodeController {
 	
 	@GetMapping(value = "/distance/postcodeA/{postcodeA}/postcodeB/{postcodeB}",  produces = MediaType.APPLICATION_JSON_VALUE)
 	public PostCodesDistance distance(@PathVariable ("postcodeA") @Size(max = 8) @NotEmpty String postcodeA, @PathVariable ("postcodeB") @Size(max = 8) @NotEmpty String postcodeB) {
+		
+		
+		log.info("Request distance between post code {} and post code {}",postcodeA,postcodeB);
+		
 		PostCodesDistance postCodesDistance = distanceService.calculateDistance(postcodeA, postcodeB);
 		return postCodesDistance;
 		

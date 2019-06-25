@@ -19,13 +19,14 @@ import org.springframework.web.server.ResponseStatusException;
 import it.wcc.postcode.dto.Coordinates;
 import it.wcc.postcode.dto.PostCodeDTO;
 import it.wcc.postcode.dto.PostCodesDistance;
+import it.wcc.postcode.service.distance.DistanceService;
 import it.wcc.postcode.service.postcode.PostCodeService;
 
 
 @RestController
 @Validated
 //@RequestMapping("/distance")
-public class DistanceController {
+public class PostCodeController {
 
 //	@GetMapping(value = "{id}/list",  produces = MediaType.APPLICATION_JSON_VALUE)
 //	public ResponseEntity<PostCodesDistance> distance() {
@@ -35,16 +36,14 @@ public class DistanceController {
 	
     @Autowired
     private PostCodeService postCodeService;
+    
+    @Autowired
+    private DistanceService distanceService;
 	
 	@GetMapping(value = "/distance/postcodeA/{postcodeA}/postcodeB/{postcodeB}",  produces = MediaType.APPLICATION_JSON_VALUE)
 	public PostCodesDistance distance(@PathVariable ("postcodeA") @Size(max = 8) @NotEmpty String postcodeA, @PathVariable ("postcodeB") @Size(max = 8) @NotEmpty String postcodeB) {
-		try {
-			PostCodesDistance p = new PostCodesDistance();
-			return p;
-		} catch (Exception e) {
-			throw new ResponseStatusException(
-			           HttpStatus.NOT_FOUND, "Foo Not Found", e);
-		}
+		PostCodesDistance postCodesDistance = distanceService.calculateDistance(postcodeA, postcodeB);
+		return postCodesDistance;
 		
 	}
 	

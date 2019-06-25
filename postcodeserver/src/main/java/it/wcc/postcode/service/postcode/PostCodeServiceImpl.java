@@ -45,7 +45,7 @@ public class PostCodeServiceImpl implements PostCodeService {
 	public PostCodeDTO updateCoordinates(String postCode, Coordinates coordinates) {
 		try {
 			return postCodeDao.updateCoordinates(postCode, coordinates);
-		} catch (Exception e) {
+		} catch (Throwable e) {
 			log.error("Error updating coordinates ",e);
 			throw new ServiceException("Error updating coordinates " , e);
 		}

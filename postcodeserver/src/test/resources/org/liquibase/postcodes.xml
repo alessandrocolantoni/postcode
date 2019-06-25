@@ -1,0 +1,48 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    
+    <changeSet author="alessandro" id="1">
+        <createTable tableName="postcodelatlng">
+            <column name="id" type="INT">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="postcode" type="VARCHAR(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            
+            <column name="latitude" type="DOUBLE"/>
+            
+            <column name="longitude" type="DOUBLE"/>
+            
+            
+             
+        </createTable>
+    </changeSet>
+    
+    <changeSet author="alessandro" id="2">
+        <createTable tableName="sequences">
+            <column name="SEQ_NAME" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SEQ_COUNT" type="BIGINT(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="alessandro" id="3">
+        <insert tableName="postcodelatlng">
+            <column name="id" valueNumeric="1"/>
+            <column name="postcode" value="AAAA BBB"/>
+            <column name="latitude" valueNumeric="57.124273770000000000"/>
+            <column name="longitude" valueNumeric="-2.127189644000000000"/>
+        </insert>
+    </changeSet>
+	<changeSet  author="alessandro" id="4">
+        <insert tableName="sequences">
+            <column name="SEQ_NAME" value="POSTCODE_SEQ"></column>
+            <column name="SEQ_COUNT" valueNumeric="10"></column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

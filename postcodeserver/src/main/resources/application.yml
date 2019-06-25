@@ -1,13 +1,25 @@
 logging:
   level:
-    org.springframework.security: DEBUG
-
-
+    org: 
+      springframework: 
+        security: @filter.logging.level.org.springframework.security@
         
 server:
   port: 9090
   servlet:
     context-path: /postcode
+    
+#-- ------- properties for postcode Datasoruce ---------------#
+
+database:
+  driverClassName: @filter.database.driverClassName@
+  postcode:
+    url: @filter.database.postcode.url@
+    username: @filter.database.postcode.username@
+    password: @filter.database.postcode.password@
+hibernate: 
+  show_sql: @filter.hibernate.show_sql@
+  dialect: @filter.hibernate.dialect@    
     
     
     

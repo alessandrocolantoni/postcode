@@ -7,9 +7,9 @@ public class PostCodesDistance implements Serializable{
 	 
 	private static final long serialVersionUID = 7117482591088276769L;
 
-	private PostCode postCodeA;
+	private PostCodeDTO postCodeA;
 	
-	private PostCode postCodeB;
+	private PostCodeDTO postCodeB;
 	
 	/**
 	 * distance between p postCodeA and postCodeB
@@ -21,19 +21,19 @@ public class PostCodesDistance implements Serializable{
 	 */
 	private String uom;
 
-	public PostCode getPostCodeA() {
+	public PostCodeDTO getPostCodeA() {
 		return postCodeA;
 	}
 
-	public void setPostCodeA(PostCode postCodeA) {
+	public void setPostCodeA(PostCodeDTO postCodeA) {
 		this.postCodeA = postCodeA;
 	}
 
-	public PostCode getPostCodeB() {
+	public PostCodeDTO getPostCodeB() {
 		return postCodeB;
 	}
 
-	public void setPostCodeB(PostCode postCodeB) {
+	public void setPostCodeB(PostCodeDTO postCodeB) {
 		this.postCodeB = postCodeB;
 	}
 

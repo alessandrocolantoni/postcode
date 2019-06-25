@@ -1,10 +1,14 @@
 package it.wcc.postcode.controller;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,10 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import it.wcc.postcode.dto.Coordinates;
-import it.wcc.postcode.dto.PostCode;
+import it.wcc.postcode.dto.PostCodeDTO;
 import it.wcc.postcode.dto.PostCodesDistance;
 
+
 @RestController
+@Validated
 //@RequestMapping("/distance")
 public class DistanceController {
 
@@ -29,7 +35,7 @@ public class DistanceController {
 //	}
 	
 	@GetMapping(value = "/distance/postcodeA/{postcodeA}/postcodeB/{postcodeB}",  produces = MediaType.APPLICATION_JSON_VALUE)
-	public PostCodesDistance distance(@PathVariable ("postcodeA") String postcodeA, @PathVariable ("postcodeB") String postcodeB) {
+	public PostCodesDistance distance(@PathVariable ("postcodeA") @Size(max = 8) @NotEmpty String postcodeA, @PathVariable ("postcodeB") @Size(max = 8) @NotEmpty String postcodeB) {
 		try {
 			PostCodesDistance p = new PostCodesDistance();
 			return p;
@@ -43,9 +49,9 @@ public class DistanceController {
 	//@PreAuthorize("#oauth2.hasScope('resource-server-read')")
 	@PreAuthorize("hasRole('ROLE_READ') or hasRole('ROLE_WRITE')")
 	@GetMapping(value = "/{postcode}",  produces = MediaType.APPLICATION_JSON_VALUE)
-	public PostCode postCode(@PathVariable ("postcode") String postcode) {
+	public PostCodeDTO postCode(@PathVariable ("postcode") @Size(max = 8) @NotEmpty String postcode) {
 		try {
-			PostCode p = new PostCode();
+			PostCodeDTO p = new PostCodeDTO();
 			return p;
 		} catch (Exception e) {
 			throw new ResponseStatusException(
@@ -56,9 +62,9 @@ public class DistanceController {
 	
 	@PreAuthorize("hasRole('ROLE_WRITE')")
 	@PutMapping(value = "/modify/{postcode}",  produces = MediaType.APPLICATION_JSON_VALUE)
-	public PostCode postCode(@RequestBody  Coordinates coordinates) {
+	public PostCodeDTO postCode(@RequestBody  Coordinates coordinates) {
 		try {
-			PostCode p = new PostCode();
+			PostCodeDTO p = new PostCodeDTO();
 			 
 			return p;
 		} catch (Exception e) {
@@ -70,9 +76,9 @@ public class DistanceController {
 	
 	@PreAuthorize("hasRole('ROLE_WRITE')")
 	@PostMapping(value = "/add",  produces = MediaType.APPLICATION_JSON_VALUE)
-	public PostCode postCode(@RequestBody  PostCode postCode) {
+	public PostCodeDTO postCode(@RequestBody  PostCodeDTO postCode) {
 		try {
-			PostCode p = new PostCode();
+			PostCodeDTO p = new PostCodeDTO();
 			 
 			return p;
 		} catch (Exception e) {

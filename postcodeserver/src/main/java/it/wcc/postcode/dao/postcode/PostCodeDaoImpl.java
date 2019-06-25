@@ -5,10 +5,12 @@ import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+ 
 
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import it.wcc.postcode.dao.AbstractJpaDAO;
 import it.wcc.postcode.dto.Coordinates;
@@ -31,6 +33,7 @@ public class PostCodeDaoImpl extends AbstractJpaDAO<PostCode> implements PostCod
     
 
     @Override
+    @Transactional(readOnly = true)
     public boolean verifyExistence (String postCode) {
     	String queryString = "SELECT postCode.postCode " +
                 "FROM PostCode postCode " +
@@ -43,6 +46,7 @@ public class PostCodeDaoImpl extends AbstractJpaDAO<PostCode> implements PostCod
     
    
 	@Override
+	@Transactional(readOnly = true)
 	public PostCodeDTO findPostCode(String postCode) {
 		PostCodeDTO postCodeDTO = null;
 		
@@ -61,6 +65,7 @@ public class PostCodeDaoImpl extends AbstractJpaDAO<PostCode> implements PostCod
 	}
 
 	@Override
+	@Transactional
 	public PostCodeDTO updateCoordinates(String postCode, Coordinates coordinates) {
 		PostCodeDTO postCodeDTO = null;
 		
@@ -88,6 +93,7 @@ public class PostCodeDaoImpl extends AbstractJpaDAO<PostCode> implements PostCod
 	}
 
 	@Override
+	@Transactional
 	public void addPostCode(PostCodeDTO postCodeDTO) {
 		PostCode postCode= simpleMapper.map(postCodeDTO.getCoordinates(), PostCode.class);
 		postCode.setPostCode(postCodeDTO.getPostCode());

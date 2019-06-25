@@ -113,21 +113,8 @@ public abstract class AbstractAppConfig {
     }
 
 
-    //////////////////////////////////////////////
 
-    /*************************************
-     @Bean public LocalEntityManagerFactoryBean geEntityManagerFactoryBean() {
-     LocalEntityManagerFactoryBean factoryBean = new LocalEntityManagerFactoryBean();
-     factoryBean.setPersistenceUnitName("FORESTERIA");
-     return factoryBean;
-     }
-
-     @Bean public JpaTransactionManager geJpaTransactionManager() {
-     JpaTransactionManager transactionManager = new JpaTransactionManager();
-     transactionManager.setEntityManagerFactory(geEntityManagerFactoryBean().getObject());
-     return transactionManager;
-     }
-     ******************************/
+   
 
     @Bean
     public Mapper simpleMapper() {

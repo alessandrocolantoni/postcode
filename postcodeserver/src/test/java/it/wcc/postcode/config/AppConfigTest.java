@@ -13,9 +13,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 
-@ComponentScans(value = {  @ComponentScan("it.wcc.postcode.dao")
-//      @ComponentScan("it.sme.foresteria.aps.service"),
-//      @ComponentScan("it.sme.foresteria.aps.controller"),
+@ComponentScans(value = {  @ComponentScan("it.wcc.postcode.dao"),
+      @ComponentScan("it.wcc.postcode.controller"),
+      @ComponentScan("it.wcc.postcode.service")
 //      @ComponentScan("it.sme.foresteria.aps.validator")
 		})
 @PropertySource("classpath:application-test.properties")
